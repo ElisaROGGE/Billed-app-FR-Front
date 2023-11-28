@@ -60,13 +60,7 @@ export default class {
             }
           });
           console.log("length", bills.length);
-          const sortedBills = bills.sort((billA, billB) => {
-            const dateA = new Date(formatDate(billA.date));
-            const dateB = new Date(formatDate(billB.date));
-            return dateA - dateB;
-          });
-          console.log(sortedBills);
-          return "test";
+          return bills;
         });
     }
   };
