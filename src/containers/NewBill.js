@@ -9,6 +9,7 @@ export default class NewBill {
     const formNewBill = this.document.querySelector(
       `form[data-testid="form-new-bill"]`
     );
+    console.log(formNewBill, 'formNewBill')
     formNewBill.addEventListener("submit", this.handleSubmit);
     const file = this.document.querySelector(`input[data-testid="file"]`);
     file.addEventListener("change", this.handleChangeFile);
@@ -19,10 +20,26 @@ export default class NewBill {
   }
   handleChangeFile = (e) => {
     e.preventDefault();
-    const file = this.document.querySelector(`input[data-testid="file"]`)
-      .files[0];
+    const allowedExtensions = ["jpg", "jpeg", "png"];
+
+    const fileInput = this.document.querySelector(`input[data-testid="file"]`);
+    const file = fileInput.files[0];
+
     const filePath = e.target.value.split(/\\/g);
     const fileName = filePath[filePath.length - 1];
+    const fileExtension = fileName.split(".").pop().toLowerCase();
+
+    if (!allowedExtensions.includes(fileExtension)) {
+      alert(
+        "Type de fichier non pris en charge. Veuillez choisir un fichier jpg, jpeg ou png."
+      );
+      console.error(
+        "Type de fichier non pris en charge. Veuillez choisir un fichier jpg, jpeg ou png."
+      );
+      e.target.value = null;
+      return;
+    }
+
     const formData = new FormData();
     const email = JSON.parse(localStorage.getItem("user")).email;
     formData.append("file", file);
@@ -69,7 +86,6 @@ export default class NewBill {
       fileName: this.fileName,
       status: "pending",
     };
-    console.log(bill);
     this.updateBill(bill);
     this.onNavigate(ROUTES_PATH["Bills"]);
   };
