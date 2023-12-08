@@ -5,6 +5,7 @@ import LoadingPage from "./LoadingPage.js";
 import Actions from "./Actions.js";
 
 const row = (bill) => {
+  console.log(bill.date);
   return `
     <tr>
       <td>${bill.type}</td>
@@ -32,6 +33,7 @@ const rows = (data) => {
     }
   }
   let sortedData = sortDataByDate(data);
+  console.log(sortedData)
   return sortedData
 };
 

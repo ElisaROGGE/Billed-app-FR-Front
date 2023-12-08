@@ -1,32 +1,18 @@
-import NewBill from '../containers/NewBill';
-import { fireEvent, screen } from '@testing-library/dom';
+/**
+ * @jest-environment jsdom
+ */
 
-describe('NewBill', () => {
-  it('should handle file change', async () => {
-    const wrongFormatFile = new File(["hello"], "hello.txt", { type: "document/txt" })
-    const mockGetElementById = jest.fn()
-    const mockErrorObj = {};
-    mockGetElementById.mockReturnValue(mockErrorObj)
-    const documentMock = {
-      querySelector: (s) => {
-        console.log('querySelector with ', s)
-        if (s === 'input[data-testid="file"]') {
-          return {
-            files: [wrongFormatFile],
-            addEventListener: () => true,
-          }
-        } else {
-          return { addEventListener: () => true }
-        }
-      },
-      getElementById: mockGetElementById
-    }        
-    const objInstance = new NewBill({
-      document: documentMock,
-      onNavigate: {},
-      store: {},            
-      localStorage: {}
+import { screen } from "@testing-library/dom"
+import NewBillUI from "../views/NewBillUI.js"
+import NewBill from "../containers/NewBill.js"
+
+
+describe("Given I am connected as an employee", () => {
+  describe("When I am on NewBill Page", () => {
+    test("Then ...", () => {
+      const html = NewBillUI()
+      document.body.innerHTML = html
+      //to-do write assertion
     })
-    objInstance.handleChangeFile({ preventDefault: () => true, target: {value: 'hello.txt'} })
-  });
-});
+  })
+})
