@@ -9,7 +9,7 @@ export default class NewBill {
     const formNewBill = this.document.querySelector(
       `form[data-testid="form-new-bill"]`
     );
-    console.log(formNewBill, 'formNewBill')
+    console.log(formNewBill, "formNewBill");
     formNewBill.addEventListener("submit", this.handleSubmit);
     const file = this.document.querySelector(`input[data-testid="file"]`);
     file.addEventListener("change", this.handleChangeFile);
@@ -25,9 +25,10 @@ export default class NewBill {
     const fileInput = this.document.querySelector(`input[data-testid="file"]`);
     const file = fileInput.files[0];
 
-    const filePath = e.target.value.split(/\\/g);
-    const fileName = filePath[filePath.length - 1];
-    const fileExtension = fileName.split(".").pop().toLowerCase();
+    // const filePath = e.target.value.split(/\\/g);
+    // const fileName = filePath[filePath.length - 1];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    console.log(fileExtension);
 
     if (!allowedExtensions.includes(fileExtension)) {
       alert(
@@ -57,7 +58,7 @@ export default class NewBill {
         console.log(fileUrl);
         this.billId = key;
         this.fileUrl = fileUrl;
-        this.fileName = fileName;
+        this.fileName = file.name;
       })
       .catch((error) => console.error(error));
   };
