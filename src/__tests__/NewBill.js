@@ -35,7 +35,6 @@ describe("NewBill", () => {
     file.addEventListener("change", handleChangeFile);
     userEvent.upload(file, new File(["file"], "hello.txt", {type: "text/plain"}))
     expect(handleChangeFile).toHaveBeenCalled()
-    // expect(file.value).toBe("hello.txt")
     expect(window.alert).toBeCalledWith("Type de fichier non pris en charge. Veuillez choisir un fichier jpg, jpeg ou png.");
   });
   it("should handle file change", async () => {

@@ -24,11 +24,7 @@ export default class NewBill {
 
     const fileInput = this.document.querySelector(`input[data-testid="file"]`);
     const file = fileInput.files[0];
-
-    // const filePath = e.target.value.split(/\\/g);
-    // const fileName = filePath[filePath.length - 1];
     const fileExtension = file.name.split(".").pop().toLowerCase();
-    console.log(fileExtension);
 
     if (!allowedExtensions.includes(fileExtension)) {
       alert(
